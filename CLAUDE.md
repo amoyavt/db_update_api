@@ -1,0 +1,1 @@
+- Always let me run the dotnet commands because you are inside my wsl

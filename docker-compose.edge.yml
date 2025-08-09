@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  edge-postgres:
+    image: postgres:15
+    container_name: edge-postgres
+    environment:
+      POSTGRES_DB: edge_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5433:5432"
+    volumes:
+      - edge_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d edge_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  edge-service:
+    build:
+      context: .
+      dockerfile: src/Edge.Service/Dockerfile
+    container_name: edge-service
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8081
+      ConnectionStrings__DefaultConnection: "Host=edge-postgres;Database=edge_db;Username=postgres;Password=postgres123"
+      CentralApi__BaseUrl: "http://host.docker.internal:8080"
+      DeviceConfig__MacAddress: "48:b0:2d:e9:c3:b7"
+      SyncConfig__IntervalMinutes: 5
+      Logging__LogLevel__Default: Information
+      Logging__LogLevel__Microsoft.AspNetCore: Warning
+    ports:
+      - "8081:8081"
+    depends_on:
+      edge-postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider --timeout=10 http://localhost:8081/health || exit 1"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 40s
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  edge_postgres_data:
+
+networks:
+  default:
+    name: db-autoupdate-network
+    external: true

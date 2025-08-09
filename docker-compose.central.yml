@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  central-postgres:
+    image: postgres:15
+    container_name: central-postgres
+    environment:
+      POSTGRES_DB: central_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - central_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d central_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  central-api:
+    build:
+      context: .
+      dockerfile: src/Central.Api/Dockerfile
+    container_name: central-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: 8080
+      ConnectionStrings__DefaultConnection: "Host=central-postgres;Database=central_db;Username=postgres;Password=postgres123"
+      Logging__LogLevel__Default: Information
+      Logging__LogLevel__Microsoft.AspNetCore: Warning
+    ports:
+      - "8080:8080"
+    depends_on:
+      central-postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider --timeout=10 http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 40s
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    environment:
+      ACCEPT_EULA: Y
+      SEQ_FIRSTRUN_NOAUTHENTICATION: "true"
+    ports:
+      - "5341:80"
+    volumes:
+      - seq_data:/data
+
+volumes:
+  central_postgres_data:
+  seq_data:
+
+networks:
+  default:
+    name: db-autoupdate-network
