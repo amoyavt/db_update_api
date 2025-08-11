@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Central.Data;
+using Central.Api.Data;
 using Shared.Models;
 
 namespace Central.Api.Services;

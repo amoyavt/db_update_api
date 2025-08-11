@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Central.Data;
+using Central.Api.Data;
 using Central.Api.Services;
 using Central.Api.Extensions;
 using FluentValidation;
@@ -25,7 +25,7 @@ builder.Services.AddScoped<ISnapshotBuilderService, SnapshotBuilderService>();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 builder.Services.AddHealthChecks()
-    .AddDbContext<CentralDbContext>("database");
+    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!, name: "database");
 
 builder.Services.AddControllers();
 

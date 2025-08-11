@@ -6,7 +6,6 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 COPY ["src/Central.Api/Central.Api.csproj", "Central.Api/"]
-COPY ["src/Central.Data/Central.Data.csproj", "Central.Data/"]
 COPY ["src/Shared.Models/Shared.Models.csproj", "Shared.Models/"]
 COPY ["src/Shared.Infrastructure/Shared.Infrastructure.csproj", "Shared.Infrastructure/"]
 

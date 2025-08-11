@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Central.Data;
+using Central.Api.Data;
 
 namespace Central.Api.Extensions;
 

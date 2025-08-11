@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Central.Data;
-using Central.Data.Entities;
+using Central.Api.Data;
+using Central.Api.Data.Entities;
 using Shared.Models;
 using Shared.Infrastructure;
 

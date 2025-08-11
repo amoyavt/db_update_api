@@ -75,7 +75,7 @@ public class SyncProcessorService : ISyncProcessorService
 
     private async Task TruncateTablesAsync()
     {
-        var tables = new[] { "devices", "areas", "users", "groups", "locations", "companies" };
+        var tables = new[] { "\"Devices\"", "\"Areas\"", "\"Users\"", "\"Groups\"", "\"Locations\"", "\"Companies\"" };
 
         foreach (var table in tables)
         {
