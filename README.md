@@ -14,6 +14,20 @@ A distributed IoT data synchronization system implementing a hub-and-spoke patte
 - **Edge Database**: Local PostgreSQL cache
 - **Sync Worker**: Automated 5-minute sync intervals
 
+## File Architecture
+  ✅ Central.Api/
+     ├── Controllers/
+     ├── Services/
+     └── Data/           ← Former Central.Data integrated here
+         ├── Entities/
+         ├── Migrations/
+         ├── CentralDbContext.cs
+         └── SeedDataService.cs
+
+  ✅ Edge.Service/       ← Independent microservice
+  ✅ Shared.Models/      ← Actually shared DTOs
+  ✅ Shared.Infrastructure/ ← Actually shared utilities
+
 ## Quick Start
 
 ### Prerequisites

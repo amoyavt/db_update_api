@@ -40,8 +40,7 @@ builder.Services.AddScoped<ISyncProcessorService, SyncProcessorService>();
 builder.Services.AddHostedService<SyncWorker>();
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!, name: "database")
-    .AddUrlGroup(new Uri($"{builder.Configuration["CentralApi:BaseUrl"] ?? "http://host.docker.internal:8080"}/health"), name: "central-api");
+    .AddNpgSql(builder.Configuration.GetConnectionString("DefaultConnection")!, name: "database");
 
 builder.Services.AddControllers();
 
