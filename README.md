@@ -10,23 +10,9 @@ A distributed IoT data synchronization system implementing a hub-and-spoke patte
 - **Seq Logging**: Centralized log aggregation
 
 ### Edge System (Spokes)
-- **Edge Service**: Background worker with sync logic
+- **Edge DbSync Service**: Background worker with sync logic
 - **Edge Database**: Local PostgreSQL cache
 - **Sync Worker**: Automated 5-minute sync intervals
-
-## File Architecture
-  ✅ Central.Api/
-     ├── Controllers/
-     ├── Services/
-     └── Data/           ← Former Central.Data integrated here
-         ├── Entities/
-         ├── Migrations/
-         ├── CentralDbContext.cs
-         └── SeedDataService.cs
-
-  ✅ Edge.Service/       ← Independent microservice
-  ✅ Shared.Models/      ← Actually shared DTOs
-  ✅ Shared.Infrastructure/ ← Actually shared utilities
 
 ## Quick Start
 
@@ -48,7 +34,7 @@ A distributed IoT data synchronization system implementing a hub-and-spoke patte
 
 3. **Verify Services**:
    - Central API: http://localhost:8080/health
-   - Edge Service: http://localhost:8081/health
+   - Edge DbSync Service: http://localhost:8081/health
    - Seq Logs: http://localhost:5341
 
 ### Manual Sync Trigger
@@ -120,15 +106,15 @@ dotnet ef migrations add InitialCreate -p src/Central.Data -s src/Central.Api
 dotnet ef database update -p src/Central.Data -s src/Central.Api
 
 # Run migrations (Edge)
-dotnet ef migrations add InitialCreate -p src/Edge.Service
-dotnet ef database update -p src/Edge.Service
+dotnet ef migrations add InitialCreate -p src/Edge.DbSync
+dotnet ef database update -p src/Edge.DbSync
 
 # Run tests
 dotnet test
 
 # Build Docker images
 docker build -f src/Central.Api/Dockerfile -t central-api .
-docker build -f src/Edge.Service/Dockerfile -t edge-service .
+docker build -f src/Edge.DbSync/Dockerfile -t edge-db-sync .
 ```
 
 ## POC Limitations

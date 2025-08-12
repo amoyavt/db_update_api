@@ -13,5 +13,6 @@ public record DeviceScopeData(
     List<GroupDto> Groups,
     List<UserDto> Users,
     List<AreaDto> Areas,
-    List<DeviceDto> Devices
+    List<DeviceDto> Devices,
+    List<ScheduleDto> Schedules
 );

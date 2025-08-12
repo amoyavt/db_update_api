@@ -13,6 +13,7 @@ public class CentralDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Area> Areas { get; set; }
     public DbSet<Device> Devices { get; set; }
+    public DbSet<Schedule> Schedules { get; set; }
     public DbSet<SyncRequest> SyncRequests { get; set; }
     public DbSet<SyncManifest> SyncManifests { get; set; }
     public DbSet<SyncAcknowledgement> SyncAcknowledgements { get; set; }
@@ -73,6 +74,18 @@ public class CentralDbContext : DbContext
             entity.HasOne(e => e.Location).WithMany(e => e.Devices).HasForeignKey(e => e.LocationId);
             entity.HasIndex(e => e.MacAddress).IsUnique();
             entity.HasIndex(e => e.LocationId);
+        });
+
+        modelBuilder.Entity<Schedule>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.EventType).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.EventData).IsRequired();
+            entity.HasOne(e => e.Area).WithMany().HasForeignKey(e => e.AreaId);
+            entity.HasIndex(e => e.AreaId);
+            entity.HasIndex(e => e.ScheduledTimeUtc);
         });
 
         modelBuilder.Entity<SyncRequest>(entity =>

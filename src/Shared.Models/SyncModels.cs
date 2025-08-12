@@ -80,6 +80,19 @@ public record AreaDto(
     DateTime CreatedAt
 );
 
+public record ScheduleDto(
+    int Id,
+    int AreaId,
+    string Name,
+    string Description,
+    DateTime ScheduledTimeUtc,
+    string EventType,
+    string EventData,
+    bool IsActive,
+    DateTime CreatedAt,
+    DateTime? LastExecutedAt = null
+);
+
 public static class SyncStatus
 {
     public const string Success = "Success";

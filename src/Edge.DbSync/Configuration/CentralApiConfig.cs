@@ -1,0 +1,8 @@
+namespace Edge.DbSync.Configuration;
+
+public class CentralApiConfig
+{
+    public const string SectionName = "CentralApi";
+
+    public string BaseUrl { get; set; } = string.Empty;
+}

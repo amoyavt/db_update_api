@@ -23,7 +23,8 @@ public class SnapshotBuilderService : ISnapshotBuilderService
             ["groups"] = scopedData.Groups.ToArray(),
             ["users"] = scopedData.Users.ToArray(),
             ["areas"] = scopedData.Areas.ToArray(),
-            ["devices"] = scopedData.Devices.ToArray()
+            ["devices"] = scopedData.Devices.ToArray(),
+            ["schedules"] = scopedData.Schedules.ToArray()
         };
 
         var tables = new List<TableManifestDto>();

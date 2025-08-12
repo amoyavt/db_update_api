@@ -96,7 +96,7 @@
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Humanizer.dll": {
+          "lib/net6.0/_._": {
             "related": ".xml"
           }
         },
@@ -109,7 +109,7 @@
       "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
+          "lib/netstandard2.1/_._": {
             "related": ".xml"
           }
         },
@@ -122,7 +122,7 @@
       "Microsoft.Build.Framework/17.8.3": {
         "type": "package",
         "compile": {
-          "ref/net8.0/Microsoft.Build.Framework.dll": {
+          "ref/net8.0/_._": {
             "related": ".xml"
           }
         },
@@ -135,7 +135,7 @@
       "Microsoft.Build.Locator/1.7.8": {
         "type": "package",
         "compile": {
-          "lib/net6.0/Microsoft.Build.Locator.dll": {}
+          "lib/net6.0/_._": {}
         },
         "runtime": {
           "lib/net6.0/Microsoft.Build.Locator.dll": {}
@@ -147,8 +147,7 @@
       "Microsoft.CodeAnalysis.Analyzers/3.3.4": {
         "type": "package",
         "build": {
-          "buildTransitive/Microsoft.CodeAnalysis.Analyzers.props": {},
-          "buildTransitive/Microsoft.CodeAnalysis.Analyzers.targets": {}
+          "buildTransitive/_._": {}
         }
       },
       "Microsoft.CodeAnalysis.Common/4.8.0": {
@@ -157,7 +156,7 @@
           "Microsoft.CodeAnalysis.Analyzers": "3.3.4"
         },
         "compile": {
-          "lib/net7.0/Microsoft.CodeAnalysis.dll": {
+          "lib/net7.0/_._": {
             "related": ".pdb;.xml"
           }
         },
@@ -214,7 +213,7 @@
           "Microsoft.CodeAnalysis.Common": "[4.8.0]"
         },
         "compile": {
-          "lib/net7.0/Microsoft.CodeAnalysis.CSharp.dll": {
+          "lib/net7.0/_._": {
             "related": ".pdb;.xml"
           }
         },
@@ -274,7 +273,7 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.8.0]"
         },
         "compile": {
-          "lib/net7.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll": {
+          "lib/net7.0/_._": {
             "related": ".pdb;.xml"
           }
         },
@@ -334,7 +333,7 @@
           "System.Composition": "7.0.0"
         },
         "compile": {
-          "lib/net7.0/Microsoft.CodeAnalysis.Workspaces.dll": {
+          "lib/net7.0/_._": {
             "related": ".pdb;.xml"
           }
         },
@@ -393,11 +392,8 @@
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.8.0]"
         },
         "compile": {
-          "lib/net7.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll": {
+          "lib/net7.0/_._": {
             "related": ".pdb;.runtimeconfig.json;.xml"
-          },
-          "lib/net7.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.dll": {
-            "related": ".BuildHost.pdb;.BuildHost.runtimeconfig.json;.BuildHost.xml;.pdb;.xml"
           }
         },
         "runtime": {
@@ -551,13 +547,13 @@
           "System.CodeDom": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/Mono.TextTemplating.dll": {}
+          "lib/net6.0/_._": {}
         },
         "runtime": {
           "lib/net6.0/Mono.TextTemplating.dll": {}
         },
         "build": {
-          "buildTransitive/Mono.TextTemplating.targets": {}
+          "buildTransitive/_._": {}
         }
       },
       "Npgsql/9.0.0": {
@@ -792,7 +788,7 @@
       "System.CodeDom/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/System.CodeDom.dll": {
+          "lib/net6.0/_._": {
             "related": ".xml"
           }
         },
@@ -827,7 +823,7 @@
       "System.Composition.AttributedModel/7.0.0": {
         "type": "package",
         "compile": {
-          "lib/net7.0/System.Composition.AttributedModel.dll": {
+          "lib/net7.0/_._": {
             "related": ".xml"
           }
         },
@@ -846,7 +842,7 @@
           "System.Composition.AttributedModel": "7.0.0"
         },
         "compile": {
-          "lib/net7.0/System.Composition.Convention.dll": {
+          "lib/net7.0/_._": {
             "related": ".xml"
           }
         },
@@ -865,7 +861,7 @@
           "System.Composition.Runtime": "7.0.0"
         },
         "compile": {
-          "lib/net7.0/System.Composition.Hosting.dll": {
+          "lib/net7.0/_._": {
             "related": ".xml"
           }
         },
@@ -881,7 +877,7 @@
       "System.Composition.Runtime/7.0.0": {
         "type": "package",
         "compile": {
-          "lib/net7.0/System.Composition.Runtime.dll": {
+          "lib/net7.0/_._": {
             "related": ".xml"
           }
         },
@@ -902,7 +898,7 @@
           "System.Composition.Runtime": "7.0.0"
         },
         "compile": {
-          "lib/net7.0/System.Composition.TypedParts.dll": {
+          "lib/net7.0/_._": {
             "related": ".xml"
           }
         },
@@ -942,25 +938,6 @@
           "lib/net8.0/Ulid.dll": {
             "related": ".xml"
           }
-        }
-      },
-      "Central.Data/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "Bogus": "35.6.0",
-          "Dapper": "2.1.35",
-          "Microsoft.EntityFrameworkCore": "9.0.0",
-          "Microsoft.EntityFrameworkCore.Design": "9.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.0",
-          "Shared.Infrastructure": "1.0.0",
-          "Shared.Models": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Central.Data.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Central.Data.dll": {}
         }
       },
       "Shared.Infrastructure/1.0.0": {
@@ -2823,11 +2800,6 @@
         "ulid.nuspec"
       ]
     },
-    "Central.Data/1.0.0": {
-      "type": "project",
-      "path": "../Central.Data/Central.Data.csproj",
-      "msbuildProject": "../Central.Data/Central.Data.csproj"
-    },
     "Shared.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../Shared.Infrastructure/Shared.Infrastructure.csproj",
@@ -2842,9 +2814,12 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "AspNetCore.HealthChecks.NpgSql >= 8.0.1",
-      "Central.Data >= 1.0.0",
+      "Bogus >= 35.6.0",
+      "Dapper >= 2.1.35",
       "FluentValidation.AspNetCore >= 11.3.0",
+      "Microsoft.EntityFrameworkCore >= 9.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.0",
+      "Npgsql.EntityFrameworkCore.PostgreSQL >= 9.0.0",
       "Polly >= 8.4.1",
       "Serilog.AspNetCore >= 8.0.2",
       "Serilog.Sinks.Seq >= 8.0.0",
@@ -2885,9 +2860,6 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\amoya\\OneDrive\\Desktop\\vt\\db_autoupdate\\src\\Central.Data\\Central.Data.csproj": {
-              "projectPath": "C:\\Users\\amoya\\OneDrive\\Desktop\\vt\\db_autoupdate\\src\\Central.Data\\Central.Data.csproj"
-            },
             "C:\\Users\\amoya\\OneDrive\\Desktop\\vt\\db_autoupdate\\src\\Shared.Infrastructure\\Shared.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\amoya\\OneDrive\\Desktop\\vt\\db_autoupdate\\src\\Shared.Infrastructure\\Shared.Infrastructure.csproj"
             },
@@ -2917,13 +2889,29 @@
             "target": "Package",
             "version": "[8.0.1, )"
           },
+          "Bogus": {
+            "target": "Package",
+            "version": "[35.6.0, )"
+          },
+          "Dapper": {
+            "target": "Package",
+            "version": "[2.1.35, )"
+          },
           "FluentValidation.AspNetCore": {
             "target": "Package",
             "version": "[11.3.0, )"
           },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[9.0.0, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[9.0.0, )"
+          },
+          "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[9.0.0, )"
           },

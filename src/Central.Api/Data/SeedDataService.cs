@@ -139,5 +139,37 @@ public static class SeedDataService
 
         context.Devices.AddRange(devices);
         await context.SaveChangesAsync();
+
+        // Create schedules
+        var scheduleFaker = new Faker<Schedule>()
+            .RuleFor(s => s.Name, f => $"{f.PickRandom("Alert", "Backup", "Maintenance", "Report")} - {f.Commerce.Product()}")
+            .RuleFor(s => s.Description, f => f.Lorem.Sentence(10))
+            .RuleFor(s => s.EventType, f => f.PickRandom("Notification", "Alert", "Maintenance", "Backup", "Report", "Cleanup", "Monitor", "Update"))
+            .RuleFor(s => s.EventData, f => f.System.CommonFileExt())
+            .RuleFor(s => s.IsActive, f => f.Random.Bool(0.85f))
+            .RuleFor(s => s.CreatedAt, f => f.Date.Between(DateTime.UtcNow.AddDays(-100), DateTime.UtcNow.AddDays(-1)))
+            .RuleFor(s => s.ScheduledTimeUtc, f => f.Date.Between(DateTime.UtcNow.AddMinutes(5), DateTime.UtcNow.AddHours(48)));
+
+        var schedules = new List<Schedule>();
+        int scheduleId = 1;
+
+        foreach (var area in areas)
+        {
+            var areaSchedules = scheduleFaker
+                .RuleFor(s => s.AreaId, area.Id)
+                .Generate(faker.Random.Int(8, 15));
+
+            foreach (var schedule in areaSchedules)
+            {
+                schedule.Id = scheduleId++;
+            }
+
+            schedules.AddRange(areaSchedules);
+        }
+
+        context.Schedules.AddRange(schedules);
+        await context.SaveChangesAsync();
+
+        Console.WriteLine($"Seeded {schedules.Count} schedules across {areas.Count} areas");
     }
 }

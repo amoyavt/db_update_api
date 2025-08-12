@@ -69,9 +69,16 @@ public class DeviceScopeService : IDeviceScopeService
             .Select(d => new DeviceDto(d.Id, d.LocationId, d.MacAddress, d.Name, d.Model, d.CreatedAt))
             .ToListAsync();
 
-        _logger.LogInformation("Retrieved scoped data for device {DeviceId}: {CompanyCount} companies, {LocationCount} locations, {GroupCount} groups, {UserCount} users, {AreaCount} areas, {DeviceCount} devices",
-            deviceId, companies.Count, locations.Count, groups.Count, users.Count, areas.Count, devices.Count);
+        var areaIds = areas.Select(a => a.Id).ToList();
+        var schedules = await _context.Schedules
+            .Where(s => areaIds.Contains(s.AreaId))
+            .OrderBy(s => s.Id)
+            .Select(s => new ScheduleDto(s.Id, s.AreaId, s.Name, s.Description, s.ScheduledTimeUtc, s.EventType, s.EventData, s.IsActive, s.CreatedAt, s.LastExecutedAt))
+            .ToListAsync();
 
-        return new DeviceScopeData(companies, locations, groups, users, areas, devices);
+        _logger.LogInformation("Retrieved scoped data for device {DeviceId}: {CompanyCount} companies, {LocationCount} locations, {GroupCount} groups, {UserCount} users, {AreaCount} areas, {DeviceCount} devices, {ScheduleCount} schedules",
+            deviceId, companies.Count, locations.Count, groups.Count, users.Count, areas.Count, devices.Count, schedules.Count);
+
+        return new DeviceScopeData(companies, locations, groups, users, areas, devices, schedules);
     }
 }
