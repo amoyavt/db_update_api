@@ -4,6 +4,25 @@ A distributed IoT data synchronization system implementing a hub-and-spoke patte
 
 ## Architecture Overview
 
+```mermaid
+graph TB
+    subgraph "Central System (Hub)"
+        CA[Central API<br/>:8080]
+        CDB[(Central PostgreSQL<br/>:5432)]
+        
+        CA --> CDB
+    end
+    
+    subgraph "Edge System (Spokes)"
+        EDB[(Edge PostgreSQL<br/>:5433)]
+        EDS[Edge DbSync Service<br/>:8081]
+        ESS[Edge Schedule Service<br/>:8082]
+        CA <--> EDS
+        EDS --> EDB
+        ESS --> EDB
+    end
+```
+
 ### Central System (Hub)
 - **Central API**: ASP.NET Core Web API handling sync requests
 - **Central Database**: PostgreSQL with master data and audit trails
@@ -11,6 +30,7 @@ A distributed IoT data synchronization system implementing a hub-and-spoke patte
 
 ### Edge System (Spokes)
 - **Edge DbSync Service**: Background worker with sync logic
+- **Edge Schedule Service**: Quartz.NET job scheduler for IoT automation
 - **Edge Database**: Local PostgreSQL cache
 - **Sync Worker**: Automated 5-minute sync intervals
 
@@ -35,6 +55,7 @@ A distributed IoT data synchronization system implementing a hub-and-spoke patte
 3. **Verify Services**:
    - Central API: http://localhost:8080/health
    - Edge DbSync Service: http://localhost:8081/health
+   - Edge Schedule Service: http://localhost:8082/health
    - Seq Logs: http://localhost:5341
 
 ### Manual Sync Trigger
